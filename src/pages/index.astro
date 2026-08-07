@@ -1,8 +1,78 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+const profile = {
+  name: "Entre L' Azar",
+  description: "Banda de R&B y Rock Alternativo",
+  avatarUrl: "/logo.jpg", // Recuerda poner la foto en /public/logo.jpg
+};
+
+const links = [
+  { 
+    name: 'Escúchanos en Spotify', 
+    url: 'https://open.spotify.com/artist/...', 
+    hoverClass: 'hover:bg-[#1DB954] hover:text-black hover:border-[#1DB954]' 
+  },
+  { 
+    name: 'Síguenos en Instagram', 
+    url: 'https://instagram.com/...', 
+    hoverClass: 'hover:bg-gradient-to-r hover:from-[#833ab4] hover:via-[#fd1d1d] hover:to-[#fcb045] hover:text-white hover:border-transparent' 
+  },
+  { 
+    name: 'Míranos en YouTube', 
+    url: 'https://youtube.com/...', 
+    hoverClass: 'hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000]' 
+  },
+  { 
+    name: 'Comunidad en Facebook', 
+    url: 'https://facebook.com/...', 
+    hoverClass: 'hover:bg-[#4267B2] hover:text-white hover:border-[#4267B2]' 
+  },
+];
 ---
 
-<Layout>
-	
+<Layout title={`${profile.name} | Links`}>
+  <!-- Contenedor Principal -->
+  <main class="max-w-xl mx-auto px-4 py-16 flex flex-col items-center w-full min-h-screen">
+    
+    <!-- Sección de Perfil -->
+    <header class="flex flex-col items-center mb-10 w-full text-center">
+      <div class="relative w-28 h-28 mb-4">
+        <img 
+          src={profile.avatarUrl} 
+          alt={`Logo de ${profile.name}`} 
+          class="rounded-full object-cover shadow-lg border-2 border-zinc-800 w-full h-full"
+        />
+      </div>
+      <h1 class="text-3xl font-bold tracking-tight mb-2 text-zinc-100">{profile.name}</h1>
+      <p class="text-zinc-400 text-lg">{profile.description}</p>
+    </header>
+
+    <!-- Sección de Enlaces -->
+    <section class="w-full flex flex-col gap-4">
+      {links.map((link) => (
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class={`
+            flex items-center justify-center w-full px-6 py-4 
+            bg-zinc-900 border border-zinc-800 rounded-2xl 
+            text-lg font-medium text-zinc-200
+            transition-all duration-300 ease-in-out
+            transform hover:-translate-y-1 hover:shadow-xl
+            ${link.hoverClass}
+          `}
+        >
+          {link.name}
+        </a>
+      ))}
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto pt-16 text-zinc-500 text-sm text-center">
+      <p>© {new Date().getFullYear()} {profile.name}. Todos los derechos reservados.</p>
+    </footer>
+    
+  </main>
 </Layout>
